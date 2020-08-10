@@ -114,9 +114,15 @@ export function updateFragPTSDTS (details, frag, startPTS, endPTS, startDTS, end
 }
 
 export function mergeDetails (oldDetails, newDetails) {
-  // potentially retrieve cached initsegment
+  // potentially retrieve cached initsegments
   if (newDetails.initSegment && oldDetails.initSegment) {
-    newDetails.initSegment = oldDetails.initSegment;
+    if (newDetails.initSegments && oldDetails.initSegments) {
+      newDetails.initSegment = oldDetails.initSegment;
+      newDetails.initSegments = {
+        ...newDetails.initSegments,
+        ...oldDetails.initSegments
+      };
+    }
   }
 
   // check if old/new playlists have fragments in common
