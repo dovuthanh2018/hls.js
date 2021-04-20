@@ -166,9 +166,9 @@ export function mergeDetails(
   newDetails: LevelDetails
 ): void {
   // potentially retrieve cached initsegment
-  if (newDetails.initSegment && oldDetails.initSegment) {
-    newDetails.initSegment = oldDetails.initSegment;
-  }
+  // if (newDetails.initSegment && oldDetails.initSegment) {
+  //   newDetails.initSegment = oldDetails.initSegment;
+  // }
 
   if (oldDetails.fragmentHint) {
     // prevent PTS and duration from being adjusted on the next hint
@@ -239,9 +239,9 @@ export function mergeDetails(
     }
   }
   if (newDetails.skippedSegments) {
-    if (!newDetails.initSegment) {
-      newDetails.initSegment = oldDetails.initSegment;
-    }
+    // if (!newDetails.initSegment) {
+    //   newDetails.initSegment = oldDetails.initSegment;
+    // }
     newDetails.startCC = newDetails.fragments[0].cc;
   }
 

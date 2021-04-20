@@ -13,7 +13,7 @@ export class LevelDetails {
   public fragments: Fragment[];
   public fragmentHint?: Fragment;
   public partList: Part[] | null = null;
-  public initSegment: Fragment | null = null;
+  // public initSegment: Fragment | null = null;
   public live: boolean = true;
   public ageHeader: number = 0;
   public advancedDateTime?: number;
@@ -21,7 +21,7 @@ export class LevelDetails {
   public advanced: boolean = true;
   public availabilityDelay?: number; // Manifest reload synchronization
   public misses: number = 0;
-  public needSidxRanges: boolean = false;
+  // public needSidxRanges: boolean = false;
   public startCC: number = 0;
   public startSN: number = 0;
   public startTimeOffset: number | null = null;

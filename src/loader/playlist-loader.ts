@@ -516,23 +516,23 @@ class PlaylistLoader {
     // in case we need SIDX ranges
     // return early after calling load for
     // the SIDX box.
-    if (levelDetails.needSidxRanges) {
-      const sidxUrl = (levelDetails.initSegment as Fragment).url as string;
-      this.load({
-        url: sidxUrl,
-        isSidxRequest: true,
-        type,
-        level,
-        levelDetails,
-        id,
-        groupId: null,
-        rangeStart: 0,
-        rangeEnd: 2048,
-        responseType: 'arraybuffer',
-        deliveryDirectives: null,
-      });
-      return;
-    }
+    // if (levelDetails.needSidxRanges) {
+    //   const sidxUrl = (levelDetails.initSegment as Fragment).url as string;
+    //   this.load({
+    //     url: sidxUrl,
+    //     isSidxRequest: true,
+    //     type,
+    //     level,
+    //     levelDetails,
+    //     id,
+    //     groupId: null,
+    //     rangeStart: 0,
+    //     rangeEnd: 2048,
+    //     responseType: 'arraybuffer',
+    //     deliveryDirectives: null,
+    //   });
+    //   return;
+    // }
 
     // extend the context with the new levelDetails property
     context.levelDetails = levelDetails;
@@ -565,9 +565,10 @@ class PlaylistLoader {
         );
       }
     });
-    (levelDetails.initSegment as Fragment).setByteRange(
-      String(sidxInfo.moovEndOffset) + '@0'
-    );
+    console.assert(false, 'Unexpected sidx request');
+    // (levelDetails.initSegment as Fragment).setByteRange(
+    //   String(sidxInfo.moovEndOffset) + '@0'
+    // );
   }
 
   private handleManifestParsingError(

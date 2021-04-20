@@ -408,16 +408,17 @@ export default class BaseStreamController
           details,
           'Level details are defined when init segment is loaded'
         );
-        const initSegment = details.initSegment as Fragment;
-        console.assert(
-          initSegment,
-          'Fragment initSegment is defined when init segment is loaded'
-        );
+        // const initSegment = details.initSegment as Fragment;
+        // console.assert(
+        //   initSegment,
+        //   'Fragment initSegment is defined when init segment is loaded'
+        // );
 
         const stats = frag.stats;
         this.state = State.IDLE;
         this.fragLoadError = 0;
-        initSegment.data = new Uint8Array(data.payload);
+        // initSegment.data = new Uint8Array(data.payload);
+        frag.data = new Uint8Array(data.payload);
         stats.parsing.start = stats.buffering.start = self.performance.now();
         stats.parsing.end = stats.buffering.end = self.performance.now();
 
@@ -736,13 +737,14 @@ export default class BaseStreamController
     let frag;
 
     // If an initSegment is present, it must be buffered first
-    if (
-      levelDetails.initSegment &&
-      !levelDetails.initSegment.data &&
-      !this.bitrateTest
-    ) {
-      frag = levelDetails.initSegment;
-    } else if (levelDetails.live) {
+    // if (
+    //   levelDetails.initSegment &&
+    //   !levelDetails.initSegment.data &&
+    //   !this.bitrateTest
+    // ) {
+    //   frag = levelDetails.initSegment;
+    // } else if (levelDetails.live) {
+    if (levelDetails.live) {
       const initialLiveManifestSize = config.initialLiveManifestSize;
       if (fragLen < initialLiveManifestSize) {
         this.warn(
@@ -775,6 +777,11 @@ export default class BaseStreamController
         ? levelDetails.partEnd
         : levelDetails.fragmentEnd;
       frag = this.getFragmentAtPosition(pos, end, levelDetails);
+    }
+
+    // If an initSegment is present, it must be buffered first
+    if (frag.initSegment && !frag.initSegment.data && !this.bitrateTest) {
+      frag = frag.initSegment;
     }
 
     return frag;

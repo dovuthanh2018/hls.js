@@ -715,6 +715,8 @@ export class Fragment extends BaseSegment {
     // (undocumented)
     endPTS?: number;
     // (undocumented)
+    initSegment: Fragment | null;
+    // (undocumented)
     level: number;
     // (undocumented)
     levelkey?: LevelKey;
@@ -1344,8 +1346,6 @@ export class LevelDetails {
     // (undocumented)
     holdBack: number;
     // (undocumented)
-    initSegment: Fragment | null;
-    // (undocumented)
     get lastPartIndex(): number;
     // (undocumented)
     get lastPartSn(): number;
@@ -1357,8 +1357,6 @@ export class LevelDetails {
     m3u8: string;
     // (undocumented)
     misses: number;
-    // (undocumented)
-    needSidxRanges: boolean;
     // (undocumented)
     get partEnd(): number;
     // (undocumented)
