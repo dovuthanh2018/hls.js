@@ -780,7 +780,7 @@ export default class BaseStreamController
     }
 
     // If an initSegment is present, it must be buffered first
-    if (frag.initSegment && !frag.initSegment.data && !this.bitrateTest) {
+    if (frag?.initSegment && !frag?.initSegment.data && !this.bitrateTest) {
       frag = frag.initSegment;
     }
 
