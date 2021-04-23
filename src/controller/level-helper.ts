@@ -169,6 +169,14 @@ export function mergeDetails(
   // if (newDetails.initSegment && oldDetails.initSegment) {
   //   newDetails.initSegment = oldDetails.initSegment;
   // }
+  const initMap = {};
+  const oldFragments = oldDetails.fragments;
+  for (let i = 0; i < oldFragments.length; i++) {
+    const oldInit = oldFragments[i].initSegment;
+    if (oldInit?.data && oldInit.relurl) {
+      initMap[oldInit.relurl] = oldInit;
+    }
+  }
 
   if (oldDetails.fragmentHint) {
     // prevent PTS and duration from being adjusted on the next hint
@@ -232,6 +240,13 @@ export function mergeDetails(
   }
 
   const newFragments = newDetails.fragments;
+  for (let i = 0; i < newFragments.length; i++) {
+    const newFrag = newFragments[i];
+    const initurl = newFrag.initSegment?.relurl;
+    if (initurl && initMap[initurl]) {
+      newFrag.initSegment = initMap[initurl];
+    }
+  }
   if (ccOffset) {
     logger.warn('discontinuity sliding from playlist, take drift into account');
     for (let i = 0; i < newFragments.length; i++) {
